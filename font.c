@@ -14,10 +14,12 @@ void draw_char(SDL_Surface *surface, unsigned char symbol, int x, int y, unsigne
     }
     const unsigned char *ptr = embedded_font + symbol * 8;
 
-    for (int i = 0, ys = 0; i < 6; i++, ptr++, ys += 1)
+    for (int i = 0, ys = 0; i < 6; i++, ptr++, ys += 1) {
+        int py = y + flip * 4 + (1 - 2 * flip) * ys;
         for (int col = 8 - 6, xs = x - col; col < 8; col++, xs -= 1)
-            if ((*ptr & 1 << col) && y + ys < surface->h && xs < surface->w)
-                ((unsigned short *)surface->pixels)[(y + flip * 4 + (1 - 2 * flip) * ys) * (surface->pitch >> 1) + xs] = color;
+            if ((*ptr & 1 << col) && py >= 0 && py < surface->h && xs >= 0 && xs < surface->w)
+                ((unsigned short *)surface->pixels)[py * (surface->pitch >> 1) + xs] = color;
+    }
 }
 
 void draw_string(SDL_Surface *surface, const char *text, int orig_x, int orig_y, unsigned short color)

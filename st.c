@@ -53,7 +53,7 @@
 #define ESC_ARG_SIZ 16
 #define STR_BUF_SIZ 256
 #define STR_ARG_SIZ 16
-#define DRAW_BUF_SIZ 20 * 1024
+#define DRAW_BUF_SIZ (20 * 1024)
 #define UTF_SIZ 4
 #define XK_NO_MOD UINT_MAX
 #define XK_ANY_MOD 0
@@ -2288,16 +2288,16 @@ void initcolormap(void)
     for (i = 16, r = 0; r < 6; r++) {
         for (g = 0; g < 6; g++) {
             for (b = 0; b < 6; b++) {
-                dc.colors[i].r = r == 0 ? 0 : 0x3737 + 0x2828 * r;
-                dc.colors[i].g = g == 0 ? 0 : 0x3737 + 0x2828 * g;
-                dc.colors[i].b = b == 0 ? 0 : 0x3737 + 0x2828 * b;
+                dc.colors[i].r = r == 0 ? 0 : 0x37 + 0x28 * r;
+                dc.colors[i].g = g == 0 ? 0 : 0x37 + 0x28 * g;
+                dc.colors[i].b = b == 0 ? 0 : 0x37 + 0x28 * b;
                 i++;
             }
         }
     }
 
     for (r = 0; r < 24; r++, i++) {
-        b = 0x0808 + 0x0a0a * r;
+        b = 0x08 + 0x0a * r;
         dc.colors[i].r = b;
         dc.colors[i].g = b;
         dc.colors[i].b = b;
